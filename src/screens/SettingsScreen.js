@@ -7,7 +7,7 @@ const SettingsScreen = ()=>{
     </View>
 };
 
-styles = StyleSheet.create({
+let styles = StyleSheet.create({
     Screen : {
         backgroundColor : "#212121",
         flex:1,

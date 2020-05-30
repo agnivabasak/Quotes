@@ -137,7 +137,7 @@ const HomeScreen = ()=>{
     </View>
 };
 
-styles = StyleSheet.create({
+let styles = StyleSheet.create({
     Screen : {
         backgroundColor : "#979797",
         flex:1,

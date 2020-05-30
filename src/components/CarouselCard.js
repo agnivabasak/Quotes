@@ -28,7 +28,7 @@ export default function CarouselCard({quote,author,id,beg,opacity}){
     </Animated.View> 
 } 
 
-styles = StyleSheet.create({
+let styles = StyleSheet.create({
     card : {
         height : (470/640)*HEIGHT ,
         width :  (290/360)*WIDTH,

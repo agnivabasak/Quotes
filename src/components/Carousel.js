@@ -15,7 +15,7 @@ export default function Carousel ({opacities}){
     </View>
 }
 
-styles=StyleSheet.create({
+let styles=StyleSheet.create({
     carousel : {
         flexDirection :"row",
         
