@@ -7,14 +7,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/screens/HomeScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import BookmarkScreen from './src/screens/BookmarkScreen';
-import Icons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+let WIDTH_RATIO = Dimensions.get("window").width/392.72727272727275;
 
 export default function App() {
   Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
         <Tab.Navigator
-          defaultNavigationOptions = {{bottomTabs: {hideShadow :true}}}
           initialRouteName = "Home"
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -28,7 +29,7 @@ export default function App() {
               {
                 iconName = 'md-bookmark';
               }
-              return <Icons name={iconName} size={!focused?28:33} color={color} />;
+              return <Icon name={iconName} size={!focused?30*WIDTH_RATIO:35*WIDTH_RATIO} color={color} />;
             },
           })}
           tabBarOptions={{
@@ -37,7 +38,7 @@ export default function App() {
             activeTintColor: '#02CC99',
             inactiveTintColor: '#C4C4C4',
             showLabel : false,
-            style : {height : "7%"},
+            style : {height : "8%"},
           }}
         >
           <Tab.Screen name = "Home" component ={HomeScreen}/>
