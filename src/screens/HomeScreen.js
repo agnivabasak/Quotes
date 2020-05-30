@@ -94,17 +94,28 @@ const HomeScreen = ()=>{
         },
         //change condition for if more than 1 and leads to out of bounds
         onPanResponderRelease : (event,gesture)=>{
-            if(0<=pos.__getValue() && pos.__getValue()<WIDTH &&gesture.dx>0)curCardPos();
+            if(0<=pos.__getValue() && pos.__getValue()<WIDTH &&gesture.dx>0)
+                {
+                    curCardPos();
+                }
             else if(pos.__getValue()<-(306/360)*4*WIDTH && gesture.dx<0)
                 curCardPos();    
             else{
             if(gesture.dx<-(115/360)*WIDTH){
                 let no = Math.floor(gesture.dx/(-(306/360)*WIDTH));
-                nextCard(no+Math.floor((-gesture.dx -no*((306/360)*WIDTH))/((115/360)*WIDTH)));
+                no= no +Math.floor((-gesture.dx -no*((306/360)*WIDTH))/((115/360)*WIDTH));
+                if(Math.floor(-pos.__getValue()/((306/360)*WIDTH)) + no >4)
+                    nextCard(no-1);
+                else
+                    nextCard(no);    
             }
             else if(gesture.dx>(115/360)*WIDTH){
                 let no = Math.floor(gesture.dx/((306/360)*WIDTH));
-                prevCard(no+Math.floor((gesture.dx -no*((306/360)*WIDTH))/((115/360)*WIDTH)));
+                no = no+Math.floor((gesture.dx -no*((306/360)*WIDTH))/((115/360)*WIDTH));
+                if(Math.ceil(-pos.__getValue()/((306/360)*WIDTH)) - no <0)
+                    prevCard(no-1);
+                else
+                    prevCard(no); 
             }
             else{
                 curCardPos();
