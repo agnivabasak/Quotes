@@ -1,22 +1,20 @@
 import * as React from "react";
-import {useRef,useEffect} from "react";
-import {View,Text,StyleSheet,Animated,PanResponder} from "react-native";
-import { TapGestureHandler } from "react-native-gesture-handler";
+import {useContext} from "react";
+import {View,Text,StyleSheet} from "react-native";
+import {Context} from "../context/Context";
+
 const BookmarkScreen = ()=>{
-    let pos = useRef(new Animated.Value(0)).current;
-    const panresponder = useRef(PanResponder.create({
-        onStartShouldSetPanResponder : ()=>true,
-        onPanResponderMove : (event,gesture)=>{
-            pos.setValue(gesture.dx);
-        },
-        onPanResponderRelease : (event,gesture)=>{
-            
-        } 
-    })).current; 
+    const {state} = useContext(Context);
+    console.log(state.Bookmarks);
     return <View style={styles.Screen}>
-        <Animated.View style={{left : pos}} {...panresponder.panHandlers}>
-            <View style={styles.box}/>
-        </Animated.View>
+        {
+            state.Bookmarks.map((item)=>{
+                return <View>
+                        <Text>{item.quote}</Text>
+                        <Text>{item.author}</Text>
+                    </View>
+            })
+        }
     </View>
 };
 
@@ -27,11 +25,6 @@ let styles = StyleSheet.create({
         alignItems  :"center",
         justifyContent : "center"
     },
-    box : {
-        backgroundColor : "#02CC99",
-        width  : 100,
-        height : 100 ,
-    }
 });
 
 export default BookmarkScreen;

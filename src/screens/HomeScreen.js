@@ -1,11 +1,13 @@
 import * as React from "react";
-import {useRef,useState} from "react";
+import {useRef,useState,useEffect,useContext} from "react";
 import {View,Text,StyleSheet,Dimensions,PanResponder,Animated} from "react-native";
 import Carousel from "../components/Carousel";
+import {Context} from "../context/Context";
 let WIDTH = Dimensions.get("window").width;
 let WIDTH_RATIO = WIDTH/392.72727272727275;
 let HEIGHT = Dimensions.get("window").height;
 const HomeScreen = ()=>{
+    const {state} = useContext(Context);
     let pos = useRef(new Animated.Value(0)).current;
     let opacities =[];
     opacities[0] = useRef(new Animated.Value(1)).current;
@@ -125,7 +127,7 @@ const HomeScreen = ()=>{
     })).current; 
     return <View style = {styles.Screen}>
         <Animated.View style={{left :pos}} {...panresponder.panHandlers}>
-            <Carousel opacities={opacities} />
+            <Carousel opacities={opacities} QuotesList={state.QuotesList} />
         </Animated.View>
         <View style = {{flexDirection : "row",alignSelf :"center"}}>
             <Animated.View style = {[styles.dot,{opacity : opacities[0]},{transform : [{scaleX :scales[0]},{scaleY :scales[0]}]}]} />

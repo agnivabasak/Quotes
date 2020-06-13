@@ -1,20 +1,27 @@
 import * as React from "react";
+import {useContext} from "react";
 import {Dimensions,View,Text,StyleSheet,TouchableOpacity,Animated} from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
-
+import {Context} from "../context/Context";
+ 
 let WIDTH = Dimensions.get("window").width;
 let WIDTH_RATIO = WIDTH/392.72727272727275;
 let HEIGHT = Dimensions.get("window").height;
-
-export default function CarouselCard({quote,author,id,beg,opacity}){
-    
-;    return <Animated.View opacity={opacity}>
+/*onPress={
+    /*bookmarked?()=>{DeleteFromBookmark(quote,author,id)
+        ChangeBookmarkStatus(quote,author,id)}: ()=>{AddToBookmark(quote,author,id)
+            ChangeBookmarkStatus(quote,author,id)}
+        }*/
+export default function CarouselCard({quote,author,id,beg,opacity,bookmarked}){
+    const {AddToBookmark,DeleteFromBookmark,ChangeBookmarkStatus} = useContext(Context);
+       return <Animated.View opacity={opacity}>
             <View style ={[styles.card,beg?{marginLeft :(35/360)*WIDTH}:null]}>
                 <View>
                     <View style={styles.options}>
-                        <TouchableOpacity activeOpacity={0.6} style={{marginRight : 20*WIDTH_RATIO}}>
-                            <Icon name="md-bookmark" size={34*WIDTH_RATIO} color="#C4C4C4" />
+                        <TouchableOpacity onPress={()=>{AddToBookmark(quote,author,id);
+        ChangeBookmarkStatus(quote,author,id)}} activeOpacity={0.6} style={{marginRight : 20*WIDTH_RATIO}}>
+                            <Icon name="md-bookmark" size={34*WIDTH_RATIO} color={bookmarked?"#E2E2E2":"#C4C4C4"} />
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={0.6}>
                             <Icon name="md-share" size={34*WIDTH_RATIO} color="#C4C4C4" /> 
@@ -48,7 +55,7 @@ let styles = StyleSheet.create({
     },
     quote: {
         color :"#E2E2E2",
-        fontSize : 26*WIDTH_RATIO,
+        fontSize : 24*WIDTH_RATIO,
         fontFamily : "Podkova-Regular",
         width: "90%",
         alignSelf:"center",
@@ -57,7 +64,7 @@ let styles = StyleSheet.create({
     },
     author : {
         color : "#02CC99",
-        fontSize: 28*WIDTH_RATIO,
+        fontSize: 26*WIDTH_RATIO,
         alignSelf : "flex-end",
         fontFamily : "Podkova-Regular",
         marginBottom :0.05*HEIGHT,
