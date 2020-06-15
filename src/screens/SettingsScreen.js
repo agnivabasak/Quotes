@@ -1,17 +1,15 @@
-import * as React from "react";
-import {View,Text,StyleSheet} from "react-native";
+import * as React from 'react';
+import {View, StyleSheet} from 'react-native';
 
-const SettingsScreen = ()=>{
-    return <View style={styles.Screen}>
-        
-    </View>
+const SettingsScreen = () => {
+  return <View style={styles.Screen} />;
 };
 
 let styles = StyleSheet.create({
-    Screen : {
-        backgroundColor : "#212121",
-        flex:1,
-    }
+  Screen: {
+    backgroundColor: '#212121',
+    flex: 1,
+  },
 });
 
 export default SettingsScreen;
