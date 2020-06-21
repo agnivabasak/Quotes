@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {useRef, useContext} from 'react';
+import {useRef, useContext,useState,useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,8 +14,13 @@ import {Context} from '../context/Context';
 let WIDTH = Dimensions.get('window').width;
 let WIDTH_RATIO = WIDTH / 392.72727272727275;
 let HEIGHT = Dimensions.get('window').height;
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const {state} = useContext(Context);
+  const [stateVar, changeStateVar] = useState(0);
+  useEffect(() => {
+    navigation.addListener('focus', () => changeStateVar(stateVar + 1));
+    console.log("HOME SCREEN - ",stateVar,state);
+  }, [state,stateVar]);
   let pos = useRef(new Animated.Value(0)).current;
   let opacities = [];
   opacities[0] = useRef(new Animated.Value(1)).current;
@@ -226,7 +232,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.Screen}>
       <Animated.View style={{left: pos}} {...panresponder.panHandlers}>
-        <Carousel opacities={opacities} QuotesList={state.QuotesList} />
+        <Carousel opacities={opacities} QuotesList={state.QuotesList} stateVar={stateVar} changeStateVar={changeStateVar} />
       </Animated.View>
       <View style={{flexDirection: 'row', alignSelf: 'center'}}>
         <Animated.View

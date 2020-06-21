@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {useEffect, useContext, useState} from 'react';
 import {Context} from '../context/Context';
@@ -12,14 +13,12 @@ export default function SplashScreen({navigation}) {
       try {
         const jsonValue = await AsyncStorage.getItem('Bookmarks');
         setBms(jsonValue != null ? await JSON.parse(jsonValue) : []);
-        console.log(bms);
         return bms;
       } catch (e) {
         console.log(e);
       }
     }
     async function getQuotes() {
-      console.log('INSIDE FUNCTION getQuotes');
       /*const response = await fetch('https://unquote-api.herokuapp.com/getQuoteList');
             console.log("GOT THE QUOTES LIST FROM API");
             const json = await response.json();
@@ -72,9 +71,7 @@ export default function SplashScreen({navigation}) {
     }
     async function setData() {
       await GetBookmarks(await getBookmarksList());
-      console.log('STEP1 done');
       await GetQuotesList(await getQuotes());
-      console.log('STEP2 done');
       navigation.navigate('TabScreens');
     }
     setData();

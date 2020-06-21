@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable semi */
 import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
@@ -8,10 +9,11 @@ import CarouselCard from './CarouselCard';
 {"_id":{"$oid":"5ecbace828a20383694c8c49"}, "Auther":"A. A. Milne","quote":"\"Organizing is what you do before you do something"}
 ,{"_id":{"$oid":"5ecbace828a20383694c8c4a"},"Auther":"A. A. Milne","quote":"\"Weeds are flowers too"}];
 */
-export default function Carousel({QuotesList, opacities}) {
+export default function Carousel({QuotesList, opacities,stateVar,changeStateVar}) {
   return (
     <View style={styles.carousel}>
       {QuotesList.map((item, index) => {
+        if(index===0) console.log("FIRST ONE IS :  ",item.bookmarked);
         // return index!=0? <CarouselCard key={index} opacity = {opacities[index]} quote = {item.quote.substr(1)} author = {item.Auther} id= {item._id.$oid} beg ={false}/> : <CarouselCard quote = {item.quote.substr(1)} opacity={opacities[index]} author = {item.Auther} id= {item._id.$oid} beg={true}/> ;
         return index !== 0 ? (
           <CarouselCard
@@ -22,6 +24,8 @@ export default function Carousel({QuotesList, opacities}) {
             id={item.id}
             beg={false}
             bookmarked={item.bookmarked}
+            stateVar={stateVar}
+            changeStateVar={changeStateVar}
           />
         ) : (
           <CarouselCard
@@ -31,6 +35,8 @@ export default function Carousel({QuotesList, opacities}) {
             id={item.id}
             beg={true}
             bookmarked={item.bookmarked}
+            stateVar={stateVar}
+            changeStateVar={changeStateVar}
           />
         );
       })}

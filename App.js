@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import {Dimensions} from "react-native";
@@ -16,7 +17,7 @@ import SplashScreen from './src/screens/SplashScreen';
 
 let WIDTH_RATIO = Dimensions.get("window").width/392.72727272727275;
 
-  Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator();
   const TabScreens =()=>{ 
     return <NavigationContainer>
         <Tab.Navigator

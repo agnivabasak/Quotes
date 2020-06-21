@@ -1,16 +1,14 @@
+/* eslint-disable prettier/prettier */
 import createContext from './createContext';
 import AsyncStorage from '@react-native-community/async-storage';
 
 async function upDateBookmarksList(quoteInfo) {
   try {
-    console.log('FUNCT FOR IT CALLED');
     const jsonValue = await AsyncStorage.getItem('Bookmarks');
     const bm = await (jsonValue != null ? await JSON.parse(jsonValue) : []);
     bm.push(quoteInfo);
-    console.log(bm);
     const StoreValue = JSON.stringify(bm);
     await AsyncStorage.setItem('Bookmarks', StoreValue);
-    console.log('DONE');
   } catch (e) {
     console.log(e);
   }
@@ -28,12 +26,10 @@ async function deleteBookmark(id) {
 }
 
 const Reducer = (state, action) => {
-  console.log(state);
   switch (action.type) {
     case 'get_quoteslist': {
       let state2 = state;
       state2.QuotesList = action.payload;
-      console.log('TOOK LIST FROM API AND ASSIGNED');
       return state2;
     }
     case 'get_bookmarks': {
@@ -42,7 +38,6 @@ const Reducer = (state, action) => {
       return state2;
     }
     case 'add_bookmark': {
-      console.log('ADD TO BOOKMARK CALLED');
       let state2 = state;
       let quoteInfo = {
         quote: action.payload.quote,
@@ -63,7 +58,7 @@ const Reducer = (state, action) => {
     }
     case 'change_status': {
       let state2 = state;
-      state2.Bookmarks = state.Bookmarks.map((item) => {
+      state2.QuotesList = state.QuotesList.map((item) => {
         if (item.id === action.payload.id) {
           return {
             id: item.id,
@@ -88,7 +83,6 @@ function GetQuotesList(dispatch) {
 }
 function GetBookmarks(dispatch) {
   return (bookmarks) => {
-    console.log(bookmarks);
     dispatch({type: 'get_bookmarks', payload: bookmarks});
   };
 }
