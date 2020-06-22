@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {useContext, useEffect, useState} from 'react';
-import {ScrollView, View, Text, StyleSheet, Dimensions} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, Dimensions,FlatList} from 'react-native';
 import {Context} from '../context/Context';
 import BookmarkCarouselCard from '../components/BookmarkCarousel';
 import { ConfirmDialog } from 'react-native-simple-dialogs';
+import { State } from 'react-native-gesture-handler';
 
 let WIDTH = Dimensions.get('window').width;
 let WIDTH_RATIO = WIDTH / 392.72727272727275;
@@ -15,7 +16,7 @@ const BookmarkScreen = ({navigation}) => {
   const [stateVar, changeStateVar] = useState(0);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
-    console.log("BOOKMARK SCREEN - ",stateVar,state);
+    console.log("BOOKMARK SCREEN - ",stateVar);
   }, [state,stateVar]);//workaround for context updation not showing in bookmark screen
   if(state.Bookmarks.length===0)
   {
@@ -23,13 +24,14 @@ const BookmarkScreen = ({navigation}) => {
           <Text style = {styles.noBookmark}>You do not have any bookmarks!</Text>
       </View>
   }
-  return (
+  console.log(state.Bookmarks);
+  /*return (
     <View style={styles.Screen}>
         <ScrollView showsVerticalScrollIndicator={false} style ={styles.scrollStyle}>
             {state.Bookmarks.map((item,index) => {
                 return (
                     <BookmarkCarouselCard
-                        index={index}
+                        key={index}
                         opacity={1}
                         quote={item.quote}
                         author={item.author}
@@ -43,7 +45,30 @@ const BookmarkScreen = ({navigation}) => {
             })}
       </ScrollView>
     </View>
-  );
+  );*/
+  return (
+    <View style={styles.Screen}>
+        <FlatList 
+            data = {state.Bookmarks}
+            renderItem = {({item,index})=>{
+                return (
+                    <BookmarkCarouselCard
+                        index={index}
+                        opacity={1}
+                        quote={item.quote}
+                        author={item.author}
+                        id={item.id}
+                        beg={false}
+                        bookmarked={item.bookmarked}
+                        stateVar={stateVar}
+                        changeStateVar={changeStateVar}
+                />
+                );
+            }}
+            keyExtractor = {(item)=>{item.id}}
+        />
+</View>
+  )
 };
 
 let styles = StyleSheet.create({

@@ -19,7 +19,6 @@ const HomeScreen = ({navigation}) => {
   const [stateVar, changeStateVar] = useState(0);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
-    console.log("HOME SCREEN - ",stateVar,state);
   }, [state,stateVar]);
   let pos = useRef(new Animated.Value(0)).current;
   let opacities = [];

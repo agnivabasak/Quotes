@@ -19,11 +19,10 @@ export default function SplashScreen({navigation}) {
       }
     }
     async function getQuotes() {
-      /*const response = await fetch('https://unquote-api.herokuapp.com/getQuoteList');
-            console.log("GOT THE QUOTES LIST FROM API");
+      const response = await fetch('https://unquote-api.herokuapp.com/getQuoteList');
             const json = await response.json();
-            const jsonlist=json.quoteList;*/
-      const jsonlist = [
+            const jsonlist=json.quoteList;
+      /*const jsonlist = [
         {
           _id: {$oid: '5ecbace828a20383694c8c46'},
           Auther: 'A. A. Milne',
@@ -50,7 +49,7 @@ export default function SplashScreen({navigation}) {
           Auther: 'A. A. Milne',
           quote: '"Weeds are flowers too',
         },
-      ];
+      ];*/
       let quoteslist = [];
       for (let elem of jsonlist) {
         let x = {};

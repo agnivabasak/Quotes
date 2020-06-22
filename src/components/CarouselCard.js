@@ -34,7 +34,6 @@ export default function CarouselCard({
   const {AddToBookmark, DeleteFromBookmark, ChangeBookmarkStatus} = useContext(
     Context,
   );
-  console.log("id : ",id," bookmarked : ",bookmarked);
   return (
     <Animated.View opacity={opacity}>
       <View

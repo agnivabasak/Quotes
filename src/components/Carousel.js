@@ -13,7 +13,6 @@ export default function Carousel({QuotesList, opacities,stateVar,changeStateVar}
   return (
     <View style={styles.carousel}>
       {QuotesList.map((item, index) => {
-        if(index===0) console.log("FIRST ONE IS :  ",item.bookmarked);
         // return index!=0? <CarouselCard key={index} opacity = {opacities[index]} quote = {item.quote.substr(1)} author = {item.Auther} id= {item._id.$oid} beg ={false}/> : <CarouselCard quote = {item.quote.substr(1)} opacity={opacities[index]} author = {item.Auther} id= {item._id.$oid} beg={true}/> ;
         return index !== 0 ? (
           <CarouselCard

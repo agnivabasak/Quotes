@@ -27,6 +27,7 @@ let HEIGHT = Dimensions.get('window').height;
             ChangeBookmarkStatus(quote,author,id)}
         }*/
 export default function BookmarkCarouselCard({
+index,
   quote,
   author,
   id,
@@ -86,7 +87,8 @@ export default function BookmarkCarouselCard({
     const toggleOverlay = () => {
       setVisible(!visible);
     };
-    const AnimatedOverlay = Animated.createAnimatedComponent(Overlay); 
+    console.log("CARD NO. ",index," : ",slide);
+    const AnimatedOverlay = Animated.createAnimatedComponent(Overlay);
   return (
 <View>
     <AnimatedOverlay  isVisible={visible} onBackdropPress={()=>{toggleOverlay()}} backdropStyle ={{backgroundColor : "#000000",opacity : 0.4}} >
