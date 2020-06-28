@@ -1,11 +1,9 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {useContext, useEffect, useState} from 'react';
-import {ScrollView, View, Text, StyleSheet, Dimensions,FlatList} from 'react-native';
+import {View, Text, StyleSheet, Dimensions,FlatList} from 'react-native';
 import {Context} from '../context/Context';
 import BookmarkCarouselCard from '../components/BookmarkCarousel';
-import { ConfirmDialog } from 'react-native-simple-dialogs';
-import { State } from 'react-native-gesture-handler';
 
 let WIDTH = Dimensions.get('window').width;
 let WIDTH_RATIO = WIDTH / 392.72727272727275;
@@ -16,13 +14,13 @@ const BookmarkScreen = ({navigation}) => {
   const [stateVar, changeStateVar] = useState(0);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
-    console.log("BOOKMARK SCREEN - ",stateVar);
-  }, [state,stateVar]);//workaround for context updation not showing in bookmark screen
-  if(state.Bookmarks.length===0)
+    console.log('BOOKMARK SCREEN - ',stateVar);
+  }, [navigation, state, stateVar]);//workaround for context updation not showing in bookmark screen
+  if (state.Bookmarks.length === 0)
   {
       return <View style={styles.noBookmarkScreen}>
           <Text style = {styles.noBookmark}>You do not have any bookmarks!</Text>
-      </View>
+      </View>;
   }
   console.log(state.Bookmarks);
   /*return (
@@ -48,7 +46,7 @@ const BookmarkScreen = ({navigation}) => {
   );*/
   return (
     <View style={styles.Screen}>
-        <FlatList 
+        <FlatList
             data = {state.Bookmarks}
             renderItem = {({item,index})=>{
                 return (
@@ -65,31 +63,31 @@ const BookmarkScreen = ({navigation}) => {
                 />
                 );
             }}
-            keyExtractor = {(item)=>{item.id}}
+            keyExtractor = {(item)=>{item.id;}}
         />
 </View>
-  )
+  );
 };
 
 let styles = StyleSheet.create({
   Screen: {
     backgroundColor: '#979797',
     flex: 1,
-    alignItems : "center",
+    alignItems : 'center',
   },
   scrollStyle :{
-    marginTop : (5/360)*HEIGHT,
+    marginTop : (5 / 360) * HEIGHT,
   },
   noBookmarkScreen : {
     backgroundColor: '#212121',
     flex: 1,
-    alignItems : "center",
-    justifyContent:"center"
+    alignItems : 'center',
+    justifyContent:'center',
   },
   noBookmark : {
     color : '#00AA7F',
     fontFamily: 'Podkova-SemiBold',
-    fontSize : 22*WIDTH_RATIO
+    fontSize : 22 * WIDTH_RATIO,
   },
   /*noBookmark : {
       fontSize : 20*WIDTH_RATIO,

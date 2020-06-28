@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 
 //error : deleting one of the bookmarks leads to the vanishing of the next bookmark as well , its till in the bookmarks list though
 
@@ -16,7 +18,6 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 import {Context} from '../context/Context';
-import { Easing } from 'react-native-reanimated';
 
 let WIDTH = Dimensions.get('window').width;
 let WIDTH_RATIO = WIDTH / 392.72727272727275;
@@ -36,7 +37,7 @@ index,
   stateVar,
   changeStateVar,
 }) {
-  const {AddToBookmark, DeleteFromBookmark, ChangeBookmarkStatus} = useContext(
+  const { DeleteFromBookmark, ChangeBookmarkStatus} = useContext(
     Context,
   );
     const [visible, setVisible] = useState(false);
@@ -54,16 +55,16 @@ index,
                 toValue : 0,
                 duration : 300,
                 useNativeDriver :false,
-            })
+            }),
         ]).start(()=>{
             DeleteFromBookmark(quote,author,id);
             ChangeBookmarkStatus(quote, author, id);
-            changeStateVar(stateVar+1);
+            changeStateVar(stateVar + 1);
         });
     };
     const margin = slide.interpolate({
         inputRange : [0,WIDTH],
-        outputRange : [(4/360)*HEIGHT,0],
+        outputRange : [(4 / 360) * HEIGHT,0],
     });
     /*const displayOverlay = ()=>{
         setVisible(true);
@@ -87,11 +88,11 @@ index,
     const toggleOverlay = () => {
       setVisible(!visible);
     };
-    console.log("CARD NO. ",index," : ",slide);
+    console.log('CARD NO. ',index,' : ',slide);
     const AnimatedOverlay = Animated.createAnimatedComponent(Overlay);
   return (
 <View>
-    <AnimatedOverlay  isVisible={visible} onBackdropPress={()=>{toggleOverlay()}} backdropStyle ={{backgroundColor : "#000000",opacity : 0.4}} >
+    <AnimatedOverlay  isVisible={visible} onBackdropPress={()=>{toggleOverlay();}} backdropStyle ={{backgroundColor : '#000000',opacity : 0.4}} >
         <Animated.View style={[styles.confirmBox,{transform:[{scale:1}]}]}>
             <Text style={styles.confirmBoxText}>Remove this quote from Bookmarks ?</Text>
             <View style={styles.yesorno}>
@@ -112,7 +113,7 @@ index,
     </AnimatedOverlay>
 <Animated.View opacity={opacity}>
       <Animated.View
-        style={[styles.card,{overflow : "hidden",height: height,width: (330 / 360) * WIDTH,marginBottom :margin,marginTop : margin,transform : [{translateX:slide}]},beg ? {marginLeft: (35 / 360) * WIDTH} : null]}>
+        style={[styles.card,{overflow : 'hidden',height: height,width: (330 / 360) * WIDTH,marginBottom :margin,marginTop : margin,transform : [{translateX:slide}]},beg ? {marginLeft: (35 / 360) * WIDTH} : null]}>
         <View>
           <View style={styles.options}>
             <TouchableOpacity
@@ -135,7 +136,7 @@ index,
             name="quote-a-right"
             size={23 * WIDTH_RATIO}
             color="#02CC99"
-            style={{marginLeft: 0.05*WIDTH}}
+            style={{marginLeft: 0.05 * WIDTH}}
           />
           <Text style={styles.quote}>{quote}</Text>
         </View>
@@ -180,25 +181,25 @@ let styles = StyleSheet.create({
     marginRight: 0.05 * WIDTH,
   },
   confirmBox : {
-      backgroundColor :"#ffffff",
-      height : 0.15*HEIGHT,
-      width : 0.8*WIDTH,
-    justifyContent :"space-between",
+      backgroundColor :'#ffffff',
+      height : 0.15 * HEIGHT,
+      width : 0.8 * WIDTH,
+    justifyContent :'space-between',
   },
   confirmBoxText : {
       fontFamily :'Podkova-Regular',
       fontSize: 22 * WIDTH_RATIO,
-      margin : 5*WIDTH_RATIO
+      margin : 5 * WIDTH_RATIO,
   },
   yesornotext  : {
     fontFamily :'Podkova-Regular',
       fontSize: 22 * WIDTH_RATIO,
-      margin : 5*WIDTH_RATIO,
+      margin : 5 * WIDTH_RATIO,
   },
   yesorno : {
-      flexDirection : "row",
-      justifyContent : "space-around",
-      borderTopColor : "#000000",
-      borderTopWidth : 1*WIDTH_RATIO
-  }
+      flexDirection : 'row',
+      justifyContent : 'space-around',
+      borderTopColor : '#000000',
+      borderTopWidth : 1 * WIDTH_RATIO,
+  },
 });

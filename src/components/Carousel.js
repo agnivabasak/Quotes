@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable semi */
 import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import CarouselCard from './CarouselCard';

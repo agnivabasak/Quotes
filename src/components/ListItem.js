@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 //for about app
 import * as React from 'react';
-import {useRef,useState} from 'react';
-import {View,StyleSheet,Text,Animated,Dimensions,TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View,StyleSheet,Text,Dimensions} from 'react-native';
 
 
 let WIDTH = Dimensions.get('window').width;
@@ -15,7 +15,7 @@ export default function ListItem ({title,data}){
             <View style={styles.header}>
                 <Text style={styles.headerText}>{title}</Text>
             </View>
-        <View style={[styles.contentStyle,{overflow :"hidden"}]}>
+        <View style={[styles.contentStyle,{overflow :'hidden'}]}>
             <Text style ={styles.contentTextStyle}>{data}</Text>
         </View>
     </View>;
@@ -23,26 +23,26 @@ export default function ListItem ({title,data}){
 
 const styles = StyleSheet.create({
     header : {
-        backgroundColor : "#333333",
-        marginTop : (8/360)*HEIGHT,
-        height: (25/360)*HEIGHT,
-        alignItems : "center",
-        justifyContent : "center"
+        backgroundColor : '#333333',
+        marginTop : (8 / 360) * HEIGHT,
+        height: (25 / 360) * HEIGHT,
+        alignItems : 'center',
+        justifyContent : 'center',
     },
     headerText : {
-        color: "#02CC99",
-        fontFamily : "Podkova-SemiBold",
-        fontSize: 25*WIDTH_RATIO,
+        color: '#02CC99',
+        fontFamily : 'Podkova-SemiBold',
+        fontSize: 25 * WIDTH_RATIO,
     },
     contentStyle : {
-        backgroundColor : "#333333",
-        marginTop : -(1/360)*HEIGHT
+        backgroundColor : '#333333',
+        marginTop : -(1 / 360) * HEIGHT,
     },
     contentTextStyle : {
-        color: "#E2E2E2",
-        fontFamily : "Podkova-Regular",
-        fontSize: 17*WIDTH_RATIO,
-        marginHorizontal : (20/360)*WIDTH,
-        marginBottom : (10/360)*HEIGHT,
-    }
+        color: '#E2E2E2',
+        fontFamily : 'Podkova-Regular',
+        fontSize: 17 * WIDTH_RATIO,
+        marginHorizontal : (20 / 360) * WIDTH,
+        marginBottom : (10 / 360) * HEIGHT,
+    },
 });

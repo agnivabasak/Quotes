@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import {useRef, useContext,useState,useEffect} from 'react';
@@ -19,7 +21,7 @@ const HomeScreen = ({navigation}) => {
   const [stateVar, changeStateVar] = useState(0);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
-  }, [state,stateVar]);
+  }, [navigation, state, stateVar]);
   let pos = useRef(new Animated.Value(0)).current;
   let opacities = [];
   opacities[0] = useRef(new Animated.Value(1)).current;

@@ -21,7 +21,7 @@ export default function SplashScreen({navigation}) {
     async function getQuotes() {
       const response = await fetch('https://unquote-api.herokuapp.com/getQuoteList');
             const json = await response.json();
-            const jsonlist=json.quoteList;
+            const jsonlist = json.quoteList;
       /*const jsonlist = [
         {
           _id: {$oid: '5ecbace828a20383694c8c46'},
@@ -74,6 +74,7 @@ export default function SplashScreen({navigation}) {
       navigation.navigate('TabScreens');
     }
     setData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <View>

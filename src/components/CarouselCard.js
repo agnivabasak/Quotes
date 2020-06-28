@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
-import {useContext, useState} from 'react';
+import {useContext} from 'react';
 import {
   Dimensions,
   View,
@@ -29,7 +29,7 @@ export default function CarouselCard({
   opacity,
   bookmarked,
   stateVar,
-  changeStateVar
+  changeStateVar,
 }) {
   const {AddToBookmark, DeleteFromBookmark, ChangeBookmarkStatus} = useContext(
     Context,
@@ -42,9 +42,9 @@ export default function CarouselCard({
           <View style={styles.options}>
             <TouchableOpacity
               onPress={() => {
-                bookmarked?DeleteFromBookmark(quote,author,id):AddToBookmark(quote, author, id);
+                bookmarked ? DeleteFromBookmark(quote,author,id) : AddToBookmark(quote, author, id);
                 ChangeBookmarkStatus(quote, author, id);
-                changeStateVar(stateVar+1);
+                changeStateVar(stateVar + 1);
               }}
               activeOpacity={0.6}
               style={{marginRight: 20 * WIDTH_RATIO}}>
@@ -62,7 +62,7 @@ export default function CarouselCard({
             name="quote-a-right"
             size={28 * WIDTH_RATIO}
             color="#02CC99"
-            style={{marginLeft: 0.05*WIDTH}}
+            style={{marginLeft: 0.05 * WIDTH}}
           />
           <Text style={styles.quote}>{quote}</Text>
         </View>

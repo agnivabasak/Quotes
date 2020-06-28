@@ -1,24 +1,23 @@
 /* eslint-disable prettier/prettier */
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {Dimensions} from "react-native";
+import {Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import { Transition } from 'react-native-reanimated';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/screens/HomeScreen';
-import {createAppContainer} from "react-navigation"
+import {createAppContainer} from 'react-navigation';
 import SettingsScreen from './src/screens/SettingsScreen';
 import BookmarkScreen from './src/screens/BookmarkScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Provider} from './src/context/Context';
 import SplashScreen from './src/screens/SplashScreen';
 
-let WIDTH_RATIO = Dimensions.get("window").width/392.72727272727275;
+let WIDTH_RATIO = Dimensions.get('window').width / 392.72727272727275;
 
   const Tab = createBottomTabNavigator();
-  const TabScreens =()=>{ 
+  const TabScreens = ()=>{
     return <NavigationContainer>
         <Tab.Navigator
           initialRouteName = "Home"
@@ -28,34 +27,34 @@ let WIDTH_RATIO = Dimensions.get("window").width/392.72727272727275;
               if (route.name === 'Home') {
                 iconName = 'md-home';
               } else if (route.name === 'Settings') {
-                iconName = 'md-settings'
+                iconName = 'md-settings';
               }
-              else if(route.name === 'Bookmark')
+              else if (route.name === 'Bookmark')
               {
                 iconName = 'md-bookmark';
               }
-              return <Icon name={iconName} size={!focused?30*WIDTH_RATIO:35*WIDTH_RATIO} color={color} />;
+              return <Icon name={iconName} size={!focused ? 30 * WIDTH_RATIO : 35 * WIDTH_RATIO} color={color} />;
             },
           })}
           tabBarOptions={{
-            activeBackgroundColor : "#131313",
-            inactiveBackgroundColor  :"#131313",
+            activeBackgroundColor : '#131313',
+            inactiveBackgroundColor  :'#131313',
             activeTintColor: '#02CC99',
             inactiveTintColor: '#C4C4C4',
             showLabel : false,
-            style : {height : "8%"},
+            style : {height : '8%'},
           }}
         >
           <Tab.Screen name = "Home" component ={HomeScreen}/>
           <Tab.Screen name = "Bookmark" component ={BookmarkScreen}/>
           <Tab.Screen name = "Settings" component ={SettingsScreen}/>
         </Tab.Navigator>
-    </NavigationContainer>
-        }
-        const  App =createAppContainer(createAnimatedSwitchNavigator(
+    </NavigationContainer>;
+        };
+        const  App = createAppContainer(createAnimatedSwitchNavigator(
           {
             SplashScreen : SplashScreen,
-            TabScreens  : TabScreens
+            TabScreens  : TabScreens,
           },
           {
             // The previous screen will slide to the bottom while the next screen will fade in
@@ -72,4 +71,4 @@ let WIDTH_RATIO = Dimensions.get("window").width/392.72727272727275;
           }
         ));
 
-export default ()=>{return <Provider><App/></Provider>}
+export default ()=>{return <Provider><App/></Provider>;};
