@@ -81,6 +81,8 @@ target 'Quotes' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'QuotesTests' do
     inherit! :complete
     # Pods for testing

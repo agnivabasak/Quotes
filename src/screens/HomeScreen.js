@@ -3,7 +3,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import {useRef, useContext,useState,useEffect} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   View,
   StyleSheet,
@@ -19,6 +21,48 @@ let HEIGHT = Dimensions.get('window').height;
 const HomeScreen = ({navigation}) => {
   const {state} = useContext(Context);
   const [stateVar, changeStateVar] = useState(0);
+  const [bms, setBms] = useState([]);
+  const {GetQuotesList, GetBookmarks} = useContext(Context);
+  useEffect(()=>{
+    async function getBookmarksList() {
+      try {
+        const jsonValue = await AsyncStorage.getItem('Bookmarks');
+        setBms(jsonValue != null ? await JSON.parse(jsonValue) : []);
+        return bms;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    async function getQuotes() {
+      const response = await fetch('https://unquote-api.herokuapp.com/getQuoteList');
+            const json = await response.json();
+            const jsonlist = json.quoteList;
+      let quoteslist = [];
+      for (let elem of jsonlist) {
+        let x = {};
+        x.quote = elem.quote;
+        x.author = elem.Auther;
+        x.id = elem._id.$oid;
+        x.bookmarked = false;
+        for (let bm of bms) {
+          if (x.id === bm.id) {
+            x.bookmarked = true;
+            break;
+          }
+        }
+        quoteslist.push(x);
+      }
+
+      return quoteslist;
+    }
+    async function setData() {
+      await GetBookmarks(await getBookmarksList());
+      await GetQuotesList(await getQuotes());
+    }
+    setData();
+    SplashScreen.hide();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
   }, [navigation, state, stateVar]);
