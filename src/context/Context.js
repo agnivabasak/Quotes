@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 async function upDateBookmarksList(quoteInfo) {
   try {
     const jsonValue = await AsyncStorage.getItem('Bookmarks');
-    console.log(jsonValue);
     const bm = await (jsonValue != null ? await JSON.parse(jsonValue) : []);
     bm.push(quoteInfo);
     const StoreValue = JSON.stringify(bm);
@@ -28,12 +27,6 @@ async function deleteBookmark(id) {
 
 const Reducer = (state, action) => {
   switch (action.type) {
-    case 'get_quoteslist': {
-      let state2 = state;
-      state2.QuotesList = action.payload;
-      console.log('done with this');
-      return state2;
-    }
     case 'get_bookmarks': {
       let state2 = state;
       state2.Bookmarks = action.payload;
@@ -58,31 +51,11 @@ const Reducer = (state, action) => {
       deleteBookmark(action.payload.id);
       return state2;
     }
-    case 'change_status': {
-      let state2 = state;
-      state2.QuotesList = state.QuotesList.map((item) => {
-        if (item.id === action.payload.id) {
-          return {
-            id: item.id,
-            author: item.author,
-            quote: item.quote,
-            bookmarked: !item.bookmarked,
-          };
-        }
-        return item;
-      });
-      return state2;
-    }
     default:
       return state;
   }
 };
 
-function GetQuotesList(dispatch) {
-  return (quotesList) => {
-    dispatch({type: 'get_quoteslist', payload: quotesList});
-  };
-}
 function GetBookmarks(dispatch) {
   return (bookmarks) => {
     dispatch({type: 'get_bookmarks', payload: bookmarks});
@@ -99,20 +72,12 @@ function DeleteFromBookmark(dispatch) {
   };
 }
 
-function ChangeBookmarkStatus(dispatch) {
-  return (quote, author, id) => {
-    dispatch({type: 'change_status', payload: {quote, author, id}});
-  };
-}
-
 export const {Context, Provider} = createContext(
   Reducer,
   {
-    GetQuotesList,
     GetBookmarks,
     AddToBookmark,
     DeleteFromBookmark,
-    ChangeBookmarkStatus,
   },
-  {QuotesList: [], Bookmarks: [], QuoteOfTheDay: ''},
+  {Bookmarks: [], QuoteOfTheDay: ''},
 );

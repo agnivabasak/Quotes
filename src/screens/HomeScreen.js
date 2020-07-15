@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
@@ -21,11 +23,22 @@ let HEIGHT = Dimensions.get('window').height;
 const HomeScreen = ({navigation}) => {
   const {state} = useContext(Context);
   const [stateVar, changeStateVar] = useState(0);
+  const [qlist,setQList] = useState([]);
+  console.log(qlist);
   const [bms, setBms] = useState([]);
-  const {GetQuotesList, GetBookmarks} = useContext(Context);
+  const {GetBookmarks} = useContext(Context);
   useEffect(() => {
-
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
+    console.log(qlist);
+    setQList(qlist.map((x)=>{
+      x.bookmarked = false;
+      for (let bm of state.Bookmarks) {
+        if (x.id === bm.id) {
+          x.bookmarked = true;
+        }
+      }
+      return x;
+    }));
   }, [navigation, state, stateVar]);
   useEffect(()=>{
     async function getBookmarksList() {
@@ -56,16 +69,15 @@ const HomeScreen = ({navigation}) => {
         }
         quoteslist.push(x);
       }
-
+      setQList(quoteslist);
       return quoteslist;
     }
     async function setData() {
       await GetBookmarks(await getBookmarksList());
-      await GetQuotesList(await getQuotes());
+      await getQuotes();
       await SplashScreen.hide();
     }
     setData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
   let pos = useRef(new Animated.Value(0)).current;
   let opacities = [];
@@ -278,7 +290,7 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.Screen}>
       <Animated.View style={{left: pos}} {...panresponder.panHandlers}>
-        <Carousel opacities={opacities} QuotesList={state.QuotesList} stateVar={stateVar} changeStateVar={changeStateVar} />
+        <Carousel opacities={opacities} QuotesList={qlist} stateVar={stateVar} changeStateVar={changeStateVar} />
       </Animated.View>
       <View style={{flexDirection: 'row', alignSelf: 'center'}}>
         <Animated.View

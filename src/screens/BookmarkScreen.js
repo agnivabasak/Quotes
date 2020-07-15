@@ -14,7 +14,6 @@ const BookmarkScreen = ({navigation}) => {
   const [stateVar, changeStateVar] = useState(0);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
-    console.log('BOOKMARK SCREEN - ',stateVar);
   }, [navigation, state, stateVar]);//workaround for context updation not showing in bookmark screen
   if (state.Bookmarks.length === 0)
   {
@@ -22,7 +21,6 @@ const BookmarkScreen = ({navigation}) => {
           <Text style = {styles.noBookmark}>You do not have any bookmarks!</Text>
       </View>;
   }
-  console.log(state.Bookmarks);
   return (
     <View style={styles.Screen}>
         <FlatList

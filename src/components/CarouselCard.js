@@ -43,6 +43,7 @@ export default function CarouselCard({
             <TouchableOpacity
               onPress={() => {
                 bookmarked ? DeleteFromBookmark(quote,author,id) : AddToBookmark(quote, author, id);
+                bookmarked = !bookmarked;
                 ChangeBookmarkStatus(quote, author, id);
                 changeStateVar(stateVar + 1);
               }}

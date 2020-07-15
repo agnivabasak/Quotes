@@ -88,7 +88,6 @@ index,
     const toggleOverlay = () => {
       setVisible(!visible);
     };
-    console.log('CARD NO. ',index,' : ',slide);
     const AnimatedOverlay = Animated.createAnimatedComponent(Overlay);
   return (
 <View>
