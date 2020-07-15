@@ -26,25 +26,31 @@ export default function CarouselCard({
   author,
   id,
   beg,
-  opacity,
+  end,
   bookmarked,
   stateVar,
   changeStateVar,
+  curind,
+  index,
 }) {
-  const {AddToBookmark, DeleteFromBookmark, ChangeBookmarkStatus} = useContext(
+  const {AddToBookmark, DeleteFromBookmark} = useContext(
     Context,
   );
+  const opacity = curind.interpolate({
+    inputRange: [index - 1, index, index + 1],
+    outputRange: [0.82, 1, 0.82],
+    extrapolate: 'clamp',
+  });
   return (
     <Animated.View opacity={opacity}>
       <View
-        style={[styles.card, beg ? {marginLeft: (35 / 360) * WIDTH} : null]}>
+        style={[styles.card, beg ? {marginLeft: (35 / 360) * WIDTH} : null,end ? {marginRight : (35 / 360) * WIDTH} : null]}>
         <View>
           <View style={styles.options}>
             <TouchableOpacity
               onPress={() => {
                 bookmarked ? DeleteFromBookmark(quote,author,id) : AddToBookmark(quote, author, id);
                 bookmarked = !bookmarked;
-                ChangeBookmarkStatus(quote, author, id);
                 changeStateVar(stateVar + 1);
               }}
               activeOpacity={0.6}
