@@ -23,27 +23,6 @@ const BookmarkScreen = ({navigation}) => {
       </View>;
   }
   console.log(state.Bookmarks);
-  /*return (
-    <View style={styles.Screen}>
-        <ScrollView showsVerticalScrollIndicator={false} style ={styles.scrollStyle}>
-            {state.Bookmarks.map((item,index) => {
-                return (
-                    <BookmarkCarouselCard
-                        key={index}
-                        opacity={1}
-                        quote={item.quote}
-                        author={item.author}
-                        id={item.id}
-                        beg={false}
-                        bookmarked={item.bookmarked}
-                        stateVar={stateVar}
-                        changeStateVar={changeStateVar}
-                />
-                );
-            })}
-      </ScrollView>
-    </View>
-  );*/
   return (
     <View style={styles.Screen}>
         <FlatList

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 async function upDateBookmarksList(quoteInfo) {
   try {
     const jsonValue = await AsyncStorage.getItem('Bookmarks');
+    console.log(jsonValue);
     const bm = await (jsonValue != null ? await JSON.parse(jsonValue) : []);
     bm.push(quoteInfo);
     const StoreValue = JSON.stringify(bm);
@@ -30,6 +31,7 @@ const Reducer = (state, action) => {
     case 'get_quoteslist': {
       let state2 = state;
       state2.QuotesList = action.payload;
+      console.log('done with this');
       return state2;
     }
     case 'get_bookmarks': {

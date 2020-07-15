@@ -3,26 +3,22 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import {Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { Transition } from 'react-native-reanimated';
-import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/screens/HomeScreen';
-import {createAppContainer} from 'react-navigation';
 import SettingsScreen from './src/screens/SettingsScreen';
 import BookmarkScreen from './src/screens/BookmarkScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Provider} from './src/context/Context';
-import SplashScreen from './src/screens/SplashScreen';
 
 let WIDTH_RATIO = Dimensions.get('window').width / 392.72727272727275;
 
   const Tab = createBottomTabNavigator();
-  const TabScreens = ()=>{
+  const App = ()=>{
     return <NavigationContainer>
         <Tab.Navigator
           initialRouteName = "Home"
           screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
+            tabBarIcon: ({ focused, color }) => {
               let iconName;
               if (route.name === 'Home') {
                 iconName = 'md-home';
@@ -51,24 +47,5 @@ let WIDTH_RATIO = Dimensions.get('window').width / 392.72727272727275;
         </Tab.Navigator>
     </NavigationContainer>;
         };
-        const  App = createAppContainer(createAnimatedSwitchNavigator(
-          {
-            SplashScreen : SplashScreen,
-            TabScreens  : TabScreens,
-          },
-          {
-            // The previous screen will slide to the bottom while the next screen will fade in
-            transition: (
-              <Transition.Together>
-                <Transition.Out
-                  type="slide-bottom"
-                  durationMs={400}
-                  interpolation="easeIn"
-                />
-                <Transition.In type="fade" durationMs={500} />
-              </Transition.Together>
-            ),
-          }
-        ));
 
 export default ()=>{return <Provider><App/></Provider>;};

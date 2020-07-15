@@ -23,6 +23,10 @@ const HomeScreen = ({navigation}) => {
   const [stateVar, changeStateVar] = useState(0);
   const [bms, setBms] = useState([]);
   const {GetQuotesList, GetBookmarks} = useContext(Context);
+  useEffect(() => {
+
+    navigation.addListener('focus', () => changeStateVar(stateVar + 1));
+  }, [navigation, state, stateVar]);
   useEffect(()=>{
     async function getBookmarksList() {
       try {
@@ -58,14 +62,11 @@ const HomeScreen = ({navigation}) => {
     async function setData() {
       await GetBookmarks(await getBookmarksList());
       await GetQuotesList(await getQuotes());
+      await SplashScreen.hide();
     }
     setData();
-    SplashScreen.hide();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
-  useEffect(() => {
-    navigation.addListener('focus', () => changeStateVar(stateVar + 1));
-  }, [navigation, state, stateVar]);
   let pos = useRef(new Animated.Value(0)).current;
   let opacities = [];
   opacities[0] = useRef(new Animated.Value(1)).current;
