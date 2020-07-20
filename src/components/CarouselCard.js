@@ -61,7 +61,7 @@ export default function CarouselCard({
                 color={bookmarked ? '#02CC99' : '#C4C4C4'}
               />
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.6}>
+            <TouchableOpacity activeOpacity={0.6} >
               <Icon name="md-share" size={34 * WIDTH_RATIO} color="#C4C4C4" />
             </TouchableOpacity>
           </View>

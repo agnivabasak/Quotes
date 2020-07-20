@@ -46,8 +46,9 @@ const Reducer = (state, action) => {
     case 'delete_bookmark': {
       let state2 = state;
       state2.Bookmarks = state.Bookmarks.filter(
-        (item) => item.id !== action.payload.id,
+        (item) => {console.log(item.id,action.payload.id); return item.id !== action.payload.id;}
       );
+      console.log(state2.Bookmarks);
       deleteBookmark(action.payload.id);
       return state2;
     }

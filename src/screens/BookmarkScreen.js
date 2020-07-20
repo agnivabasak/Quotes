@@ -28,7 +28,6 @@ const BookmarkScreen = ({navigation}) => {
             renderItem = {({item,index})=>{
                 return (
                     <BookmarkCarouselCard
-                        index={index}
                         opacity={1}
                         quote={item.quote}
                         author={item.author}

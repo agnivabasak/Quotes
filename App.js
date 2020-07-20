@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions,StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/screens/HomeScreen';
@@ -15,6 +15,7 @@ let WIDTH_RATIO = Dimensions.get('window').width / 392.72727272727275;
   const Tab = createBottomTabNavigator();
   const App = ()=>{
     return <NavigationContainer>
+        <StatusBar backgroundColor= "#000000" barStyle="light-content" />
         <Tab.Navigator
           initialRouteName = "Home"
           screenOptions={({ route }) => ({

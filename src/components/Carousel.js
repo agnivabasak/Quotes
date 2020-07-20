@@ -18,10 +18,11 @@ let WIDTH = Dimensions.get('window').width;
 //let HEIGHT = Dimensions.get('window').height;
 
 
-export default function Carousel({QuotesList,stateVar,changeStateVar,ind}) {
+export default function Carousel({QuotesList,stateVar,changeStateVar,ind,refContainer}) {
   return (
     <FlatList
       data={QuotesList}
+      ref = {refContainer}
       keyExtractor={(item) => item.id}
       horizontal
       showsHorizontalScrollIndicator={false}
@@ -41,7 +42,6 @@ export default function Carousel({QuotesList,stateVar,changeStateVar,ind}) {
           {
             ind.setValue(1 + (nativeEvent.contentOffset.x - (298 / 360) * WIDTH) / ((306 / 360) * WIDTH));
           }
-        console.log(ind);
       }}
       renderItem={({item, index}) => {return (
         <CarouselCard

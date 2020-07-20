@@ -22,11 +22,13 @@ import {Context} from '../context/Context';
 let WIDTH = Dimensions.get('window').width;
 let WIDTH_RATIO = WIDTH / 392.72727272727275;
 let HEIGHT = Dimensions.get('window').height;
+
 /*onPress={
     /*bookmarked?()=>{DeleteFromBookmark(quote,author,id)
         ChangeBookmarkStatus(quote,author,id)}: ()=>{AddToBookmark(quote,author,id)
             ChangeBookmarkStatus(quote,author,id)}
         }*/
+
 export default function BookmarkCarouselCard({
 index,
   quote,
@@ -37,13 +39,14 @@ index,
   stateVar,
   changeStateVar,
 }) {
-  const { DeleteFromBookmark, ChangeBookmarkStatus} = useContext(
+  const { DeleteFromBookmark} = useContext(
     Context,
   );
     const [visible, setVisible] = useState(false);
     //const op = useRef(new Animated.Value(0)).current;
     const slide = useRef(new Animated.Value(0)).current;
     const height = useRef(new Animated.Value((250 / 640) * HEIGHT)).current;
+    console.log('id : ',id,slide,height);
     const deleteAnimation = ()=>{
         Animated.sequence([
             Animated.timing(slide,{
@@ -58,8 +61,6 @@ index,
             }),
         ]).start(()=>{
             DeleteFromBookmark(quote,author,id);
-            ChangeBookmarkStatus(quote, author, id);
-            changeStateVar(stateVar + 1);
         });
     };
     const margin = slide.interpolate({
