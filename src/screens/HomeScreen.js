@@ -95,7 +95,7 @@ const HomeScreen = ({navigation}) => {
         </View>
       </Overlay>
       <View>
-        <Carousel QuotesList={qlist} stateVar={stateVar} changeStateVar={changeStateVar} ind={ind} />
+        <Carousel QuotesList={qlist} stateVar={stateVar} changeStateVar={changeStateVar} ind={ind} refContainer={refContainer}/>
       </View>
       <CarouselDots refContainer={refContainer} ind={ind} />
     </View>

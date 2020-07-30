@@ -64,7 +64,7 @@ export default function CarouselDots({ind,refContainer}) {
   });
   return (
     <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-      <TouchableOpacity activeOpacity={1} onPress={()=>refContainer.current.scrollToIndex({ animated: true, index: 0 })}>
+      <TouchableOpacity activeOpacity={0.8} onPress={()=>refContainer.current.scrollToIndex({ animated: true, index: 0,viewPosition : 0.5 })}>
         <Animated.View
           style={[
             styles.dot,
@@ -73,7 +73,7 @@ export default function CarouselDots({ind,refContainer}) {
           ]}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8} onPress={()=>refContainer.current.scrollToIndex({ animated: true, index: 1,viewPosition : 0.5})}>
         <Animated.View
           style={[
             styles.dot,
@@ -82,7 +82,7 @@ export default function CarouselDots({ind,refContainer}) {
           ]}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8} onPress={()=>refContainer.current.scrollToIndex({ animated: true, index: 2,viewPosition : 0.5 })}>
         <Animated.View
           style={[
             styles.dot,
@@ -91,7 +91,7 @@ export default function CarouselDots({ind,refContainer}) {
           ]}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8} onPress={()=>refContainer.current.scrollToIndex({ animated: true, index: 3,viewPosition : 0.5 })}>
         <Animated.View
           style={[
             styles.dot,
@@ -100,7 +100,7 @@ export default function CarouselDots({ind,refContainer}) {
           ]}
         />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8} onPress={()=>refContainer.current.scrollToIndex({ animated: true, index: 4,viewPosition : 0.5})}>
         <Animated.View
           style={[
             styles.dot,
