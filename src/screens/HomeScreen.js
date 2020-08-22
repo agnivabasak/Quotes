@@ -28,7 +28,6 @@ const HomeScreen = ({navigation}) => {
   const [err,setErr] = useState(false);
   const [stateVar, changeStateVar] = useState(0);
   const [qlist,setQList] = useState([]);
-  const [bms, setBms] = useState([]);
   const {GetBookmarks} = useContext(Context);
   useEffect(() => {
     navigation.addListener('focus', () => changeStateVar(stateVar + 1));
@@ -43,10 +42,12 @@ const HomeScreen = ({navigation}) => {
     }));
   }, [navigation, state, stateVar]);
   useEffect(()=>{
+    let bms;
     async function getBookmarksList() {
       try {
         const jsonValue = await AsyncStorage.getItem('Bookmarks');
-        setBms(jsonValue != null ? await JSON.parse(jsonValue) : []);
+        bms = await (jsonValue != null ? await JSON.parse(jsonValue) : []);
+        console.log(bms);
         return bms;
       } catch (e) {
         console.log(e);
@@ -82,6 +83,7 @@ const HomeScreen = ({navigation}) => {
     }
     async function setData() {
       await GetBookmarks(await getBookmarksList());
+      console.log(bms);
       await getQuotes();
       SplashScreen.hide();
     }

@@ -7,6 +7,7 @@ async function upDateBookmarksList(quoteInfo) {
     const jsonValue = await AsyncStorage.getItem('Bookmarks');
     const bm = await (jsonValue != null ? await JSON.parse(jsonValue) : []);
     bm.push(quoteInfo);
+    console.log(bm);
     const StoreValue = JSON.stringify(bm);
     await AsyncStorage.setItem('Bookmarks', StoreValue);
   } catch (e) {
@@ -30,6 +31,7 @@ const Reducer = (state, action) => {
     case 'get_bookmarks': {
       let state2 = state;
       state2.Bookmarks = action.payload;
+      console.log(action.payload);
       return state2;
     }
     case 'add_bookmark': {
